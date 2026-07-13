@@ -1,5 +1,6 @@
 Nodemon 
 
+```
 {
     "watch": [
         "src"
@@ -13,5 +14,5 @@ Nodemon
     "delay": "500",
     "verbose": true
 }
-
+```
 
