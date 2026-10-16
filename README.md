@@ -90,3 +90,43 @@ echo "  • commit-msg  → vérifie toujours le message de commit"
 echo "  • pre-commit  → lance les tests SEULEMENT s'ils existent"
 
 ```
+
+
+#
+##
+###
+For PHP
+```
+
+mkdir -p .githooks
+
+cat > .githooks/commit-msg <<'EOF'
+#!/bin/sh
+
+MESSAGE_FILE="$1"
+MESSAGE=$(cat "$MESSAGE_FILE")
+
+# Ignorer les lignes de commentaire Git
+MESSAGE=$(printf '%s\n' "$MESSAGE" | sed '/^#/d' | sed '/^[[:space:]]*$/d' | head -n 1)
+
+# Format requis : type(scope): description
+if ! printf '%s\n' "$MESSAGE" | grep -Eq '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9._/-]+\))?!?: .+'; then
+    echo ""
+    echo "ERREUR : message de commit invalide."
+    echo "Format requis : type(scope): description"
+    echo ""
+    echo "Exemples :"
+    echo "  feat(git): add commit validation"
+    echo "  fix(api): correct response"
+    echo "  docs(readme): update documentation"
+    exit 1
+fi
+
+echo "Message de commit valide."
+exit 0
+EOF
+
+chmod +x .githooks/commit-msg
+git config core.hooksPath .githooks
+
+```
