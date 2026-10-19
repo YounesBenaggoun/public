@@ -130,3 +130,9 @@ chmod +x .githooks/commit-msg
 git config core.hooksPath .githooks
 
 ```
+Package.json --> script
+
+```
+    "dev": "nodemon --exec \"clear && node\"   src/server.js ",
+    "test": "npx vitest --reporter verbose",
+```
