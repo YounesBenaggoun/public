@@ -6,15 +6,15 @@ nodemon.json
 ```
 {
     "watch": [
-        "src"
+        ".",
+        ".env"
     ],
-    "ext": "js,json,ts",
+    "ext": "js,json,env",
     "ignore": [
-        "src/**/*.test.js",
-        "node_modules"
+        "node_modules/**"
     ],
-    "exec": "node src/server.js",
-    "delay": "500",
+    "exec": "clear && node src/server.js",
+    "legacyWatch": true,
     "verbose": true
 }
 ```
